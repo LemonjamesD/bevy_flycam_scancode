@@ -32,25 +32,34 @@ impl Default for MovementSettings {
 /// Key configuration
 #[derive(Resource)]
 pub struct KeyBindings {
-    pub move_forward: KeyCode,
-    pub move_backward: KeyCode,
-    pub move_left: KeyCode,
-    pub move_right: KeyCode,
-    pub move_ascend: KeyCode,
-    pub move_descend: KeyCode,
-    pub toggle_grab_cursor: KeyCode,
+    pub move_forward: ScanCode,
+    pub move_backward: ScanCode,
+    pub move_left: ScanCode,
+    pub move_right: ScanCode,
+    pub move_ascend: ScanCode,
+    pub move_descend: ScanCode,
+    pub toggle_grab_cursor: ScanCode,
 }
+
+// Scan codes
+const W: ScanCode = ScanCode(17);
+const S: ScanCode = ScanCode(31);
+const A: ScanCode = ScanCode(30);
+const D: ScanCode = ScanCode(32);
+const SPACE: ScanCode = ScanCode(57);
+const SHIFTLEFT: ScanCode = ScanCode(42);
+const ESCAPE: ScanCode = ScanCode(1);
 
 impl Default for KeyBindings {
     fn default() -> Self {
         Self {
-            move_forward: KeyCode::W,
-            move_backward: KeyCode::S,
-            move_left: KeyCode::A,
-            move_right: KeyCode::D,
-            move_ascend: KeyCode::Space,
-            move_descend: KeyCode::ShiftLeft,
-            toggle_grab_cursor: KeyCode::Escape,
+            move_forward: W,
+            move_backward: S,
+            move_left: A,
+            move_right: D,
+            move_ascend: SPACE,
+            move_descend: SHIFTLEFT,
+            toggle_grab_cursor: ESCAPE,
         }
     }
 }
@@ -96,7 +105,7 @@ fn setup_player(mut commands: Commands) {
 
 /// Handles keyboard input and movement
 fn player_move(
-    keys: Res<Input<KeyCode>>,
+    keys: Res<Input<ScanCode>>,
     time: Res<Time>,
     primary_window: Query<&Window, With<PrimaryWindow>>,
     settings: Res<MovementSettings>,
