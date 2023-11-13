@@ -185,7 +185,7 @@ fn player_look(
 }
 
 fn cursor_grab(
-    keys: Res<Input<KeyCode>>,
+    keys: Res<Input<ScanCode>>,
     key_bindings: Res<KeyBindings>,
     mut primary_window: Query<&mut Window, With<PrimaryWindow>>,
 ) {
